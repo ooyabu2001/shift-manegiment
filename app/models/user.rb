@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
 def self.guest
   find_or_create_by!(email: "guest@example.com")#ゲスト専用Emailを探すか新しく作成
   user.password = secureRandom.urlsafe_base64(6) #パスワードをランダムかつ６文字以上で作成

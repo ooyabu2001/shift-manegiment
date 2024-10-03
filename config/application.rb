@@ -16,7 +16,13 @@ module ShiftManagement
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+     config.time_zone = 'Tokyo' #日本時間に設定
+      config.active_record.default_timezone = :local
+    # config.eager_load_paths << Rails.root.join("extras")　#アプリ内の時間範囲などをデーターベースで操作
+    config.i18n.default_locale = :ja  #日本語に設定
+    
+     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] #複数のローカルファイル読み込み
+     
+
   end
 end

@@ -1,1 +1,21 @@
-<div id ="calendar"></div>
+<%= month_calendar(events: @tasks) do |date, tasks| %>
+  <%= date.day %><br>
+  <% tasks.each do |task| %>
+    <%= task.title %>
+  <% end %>
+<% end %>
+
+<h1 style="color: blue;">予定投稿フォーム</h1>
+<%= form_with model: @task, html: { class: "custom-form" } do |f| %>
+
+<h3 class="font-weight-bold">タスク名</h3>
+<%= f.text_field :task_title %>
+
+<h3 class="font-weight-bold">出勤時間</h3>
+<%= f.text_field :working_hours %>
+
+<%= f.submit '登録' %>
+<% end %>
+
+
+

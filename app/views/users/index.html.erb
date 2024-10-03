@@ -1,0 +1,9 @@
+talk-groups_List--friends
+span.select-friends-list 友達
+
+ul
+ - current_user.followings.each do |follower|
+  li class="follower" id="#{follower.id}"
+  = link_to user_path(follower.id) do
+  = render partial: 'users/attachment', locals: { user: follower}
+  p = follower.name
