@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'group/index'
-  get 'group/show'
-  get 'users/show'
-  get 'users/edit'
-  get 'users/index'
+ resources :users, only: [:show,:index,:edit]
+ resources :group, only: [:index,:show,:create]
+ resources :messages, only: [:create,:destroy]
  resources :tasks, only: [:index,:create]
   devise_for :users
   devise_scope :user do
