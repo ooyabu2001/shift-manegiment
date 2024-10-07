@@ -1,12 +1,16 @@
 class MessagesController < ApplicationController
 
   def create
-    message = Message.new(message_params)
-    message.user_id = current_user.id
-    if message.save
-      redirect_to group_path(message.group)
+    @message = current_user.messages.build(message_params)
+    if @message.save
+      flash[:norice] = "メッセージを送信しました。"
+      redirect_to user_path(@message.receiver_id)
     else
-      redirect_back(fallback_location: group_path)#一つ前の画面にとぶ
+      flash.now[:alert] = "メッセージの送信に失敗しました。"
+      @user = User.find(@message.receiver_id)
+      @group = @message.group
+      @messages = @group&.messages || []
+      render 'users/show'
     end
   end
 
@@ -19,6 +23,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-      params.require(:message).permit(:group_id, :body)
+      params.require(:message).permit(:group_id, :body, :user_id, :receiver_id)
   end
 end

@@ -1,8 +1,44 @@
- <body>
 <div class="container">
- <div class="row">
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th>自己紹介</th>
+            <td><%= @user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% if @user == current_user %>
+        <%= link_to '編集', edit_user_path(@user), class: 'btn-sm btn-primary' %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <% @messages.each do |message| %>
+          <div class="col-8 <%= "offset-4" if message.user == current_user %>">
+            <div class="card my-2">
+              <div class="card-body">
+                <%= message.body %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
-
-<div class="table"></div>
-
- </body>
+      <hr>
+      <% if @user != current_user %>
+        <%= form_with model: @message, class: "my-4" do |f| %>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :receiver_id %>
+          <%= f.text_area :body, rows: 3, placeholder: "直接メッセージを送信できます", class: "form-control" %>
+          <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

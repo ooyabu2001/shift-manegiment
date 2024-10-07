@@ -1,9 +1,20 @@
-talk-groups_List--friends
-span.select-friends-list 友達
-
-ul
- - current_user.followings.each do |follower|
-  li class="follower" id="#{follower.id}"
-  = link_to user_path(follower.id) do
-  = render partial: 'users/attachment', locals: { user: follower}
-  p = follower.name
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>| 氏名</th>
+        <th> | 自己紹介</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.introduction %></td>
+          <td><%= link_to "詳細", user_path(user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
