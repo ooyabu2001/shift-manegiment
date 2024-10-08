@@ -1,6 +1,6 @@
 class Message < ApplicationRecord
   attribute :receiver_id, :integer
-  
+
   belongs_to :user
   belongs_to :group
 
@@ -12,9 +12,8 @@ class Message < ApplicationRecord
 
   def set_entries
     if self.group.nil?
-      groups = Group.joins(:entries)
-                    .where(group_name: nil,
-                           'entries.user_id': [self.user_id, self.receiver_id])
+      groups = Group.dm.joins(:entries)
+                       .where('entries.user_id': [self.user_id, self.receiver_id])
       result_ids = groups.map {|o| [ o.id, o.entries.pluck(:user_id).sort ] }
       target_ids = [self.user_id, self.receiver_id].sort
       errors.add(:base, "同一IDには送信できません。") if self.user_id == self.receiver_id

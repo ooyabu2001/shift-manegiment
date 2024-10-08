@@ -1,0 +1,25 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>グループ名</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @groups.any? %>
+        <% @groups.each do |group| %>
+           <tr>
+             <td><%= group.group_name %></td>
+             <td><%= link_to "詳細", group_path(group) %></td>
+           </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan=2>グループはまだありません。</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>グループ名</th>
+            <td><%= @group.group_name %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% if @users.include?(current_user) %>
+        <%= link_to "このグループを退会する", entry_path(@entry), method: :delete,
+                                              data: { confirm: "本当に退会しますか？" },
+                                              class: "btn btn-danger" %>
+      <% else %>
+        <%= form_with model: @entry do |f| %>
+          <%= f.hidden_field :group_id %>
+          <%= f.submit "このグループに参加する", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <% if @users.include?(current_user) %>
+        <div class="row">
+          <% @messages.each do |message| %>
+            <div class="col-8 <%= "offset-4" if message.user == current_user %>">
+              <div class="card my-2">
+                <div class="card-body">
+                  <%= message.body %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <h3>グループに参加すると、メッセージを閲覧・送信できます。</h3>
+      <% end %>
+      <hr>
+      <% if @users.include?(current_user) %>
+        <%= form_with model: @message, url: group_messages_path, class: "my-4" do |f| %>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :group_id %>
+          <%= f.text_area :body, rows: 3, placeholder: "メッセージを送信できます", class: "form-control" %>
+          <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

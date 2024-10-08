@@ -5,8 +5,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @tasks =Task.new(task_params)
+    @task =Task.new(task_params)
     @task.user_id = current_user.id
+    @task.start_time = task_params[:working_hours] # シンプルカレンダーで扱うカラムに同じ値を複製する
+    # TODO: viewでシンプルカレンダーを呼び出す際にとある指定をするとstart_timeカラム以外のカラムを基準の日付として扱う事が出来る
     @task.save
      redirect_to tasks_path
 
