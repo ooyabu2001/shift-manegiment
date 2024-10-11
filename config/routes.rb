@@ -6,7 +6,8 @@ devise_scope :user do
 end
 
  root to: "homes#top"
- get "/homes/about", to: "homes#about", as: "about"
+ get "homes/about", to: "homes#about", as: "about"
+ get 'mypage', to: 'users#mypage', as: "users_mypage"
 
  resources :users, only: [:show,:index,:edit]
  resources :groups, only: [:index,:show,:create]

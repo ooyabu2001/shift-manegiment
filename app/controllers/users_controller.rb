@@ -3,14 +3,16 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+
   end
 
    def mypage
-       @user = User.new
+       @users = User.new
    end
 
 
   def show
+    @users=User.all
     @user = User.find(params[:id])
     groups = Group.joins(:entries)
                   .where(group_name: nil,
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
     @group = Group.find_by_id(group_exist.first.first) if group_exist.any?
     @message = @user.messages.build(receiver_id: @user.id)
     @messages = @group&.messages || []
-    
+
     # # @current_entry = Entry.where(user_id: current_user.id)# ログインしているユーザー（current_user）に紐付いたエントリーを取得
     # @another_entry = Entry.where(user_id: @user.id)
     # unless @user.id == current_user.id

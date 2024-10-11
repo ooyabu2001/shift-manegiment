@@ -81,8 +81,32 @@
 
 </header>
 
-
   <body>
+<div class="container">
+ <div class="row">
+  <div class="col-md-3 col-xl-2 bd-sidebar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <ul class="nav flex-column">
+
+       <li class="nav-item">
+         <%=link_to users_mypage_path, class: 'nav-link text-light' do %>
+          <i class="fa-solid fa-house"></i> ホーム
+         <% end %>
+       </li>
+
+
+       <li class="nav-item">
+         <%=link_to @user, class: 'nav-link text-light' do %>
+           <i class="fa-solid fa-comment"></i> メッセージ
+         <% end %>
+       </li>
+  </div>
+ </div>
+</div>
+
+
+
+
     <%= notice %>
     <%= alert %>
     <%= yield %>
