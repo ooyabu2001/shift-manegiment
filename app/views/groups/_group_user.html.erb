@@ -1,0 +1,22 @@
+<div class="container">
+ <div class="row">
+  <div class="col-md-5 col-lg-3 col-xl-2 bg-info ">
+    <!--<nav class="navbar navbar-expand-lg navbar-light bg-info">-->
+      <ul class="var flex-column">
+        <h3>side var</h3>
+
+       <li class="var-item">
+         <%=link_to users_mypage_path, class: 'nav-link text-light' do %>
+          <i class="fa-solid fa-house"></i> ホーム
+         <% end %>
+       </li>
+
+
+       <li class="var-item">
+         <%=link_to users_path, class: 'nav-link text-light' do %>
+           <i class="fa-solid fa-comment"></i> メッセージ
+         <% end %>
+       </li>
+  </div>
+ </div>
+</div>

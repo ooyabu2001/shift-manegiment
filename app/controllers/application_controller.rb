@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
  def after_sign_out_path_for(resource)
 root_path
  end
+ 
+ # def check_users_authorization
+  # if repuest.path.start_with?('/users')
+   
 
   protected
 
