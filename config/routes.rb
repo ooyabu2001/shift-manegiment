@@ -8,7 +8,8 @@ end
  root to: "homes#top"
  get "homes/about", to: "homes#about", as: "about"
  get 'mypage', to: 'users#mypage', as: "users_mypage"
-
+ 
+ get "search" => "searches#search"
  resources :users, only: [:show,:index,:edit]
  resources :groups, only: [:index,:show,:create]
  post 'group_messages', to: "messages#group_create", as: "group_messages"
