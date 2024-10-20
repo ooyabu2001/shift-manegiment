@@ -12,18 +12,18 @@
 
 <div class="row">
   <% if user_signed_in? %>
-    <%= current_user.email %> 
+    <%= current_user.email %>
   <% end %>
 </div>
 
  <div class="d-grid gap-2">
 
   <div class="row">
-  <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary btn-sm btn-block mb-3" %>
+   <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary btn-sm btn-block mb-3" %>
   </div>
 
    <div class="row">
-   <%= link_to "ゲストログイン" ,users_guest_sign_in_path, class: "btn btn-primary btn-sm btn-block", method: :post %>
+    <%= link_to "ゲストログイン" ,users_guest_sign_in_path, class: "btn btn-primary btn-sm btn-block", method: :post %>
    </div>
 
 </div>

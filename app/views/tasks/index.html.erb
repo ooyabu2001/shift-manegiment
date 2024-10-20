@@ -1,7 +1,7 @@
 <%= month_calendar(events: @tasks) do |date, tasks| %>
   <%= date.day %><br>
   <% tasks.each do |task| %>
-    <%= task.task_title %>
+    <%= link_to task.task_title, task_path(task.id) %>
   <% end %>
 <% end %>
 
@@ -13,6 +13,10 @@
 
 <h3 class="font-weight-bold">出勤時間</h3>
 <%= f.text_field :working_hours %>
+
+ <h3 class="font-weight-bold">日付</h3>
+  <%= f.date_field :display_date %>
+
 
 <%= f.submit '登録' %>
 <% end %>
