@@ -11,7 +11,7 @@ end
 
  get "search" => "searches#search"
  resources :users, only: [:show,:index,:edit]
- resources :groups, only: [:index,:show,:create]
+ resources :groups, only: [:new,:index,:show,:create]
  post 'group_messages', to: "messages#group_create", as: "group_messages"
  resources :entries, only: [:create, :destroy]
  resources :messages, only: [:create,:destroy]
