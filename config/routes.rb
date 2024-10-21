@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+  sessions: 'admin/sessions'
+  }
+  
 devise_for :users
 devise_scope :user do
   post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
@@ -10,10 +14,12 @@ end
  get 'mypage', to: 'users#mypage', as: "users_mypage"
 
  get "search" => "searches#search"
- resources :users, only: [:show,:index,:edit]
- resources :groups, only: [:new,:index,:show,:create]
+ resources :users
+
+ resources :groups do
+  resources :entries, only: [:create, :destroy]  # グループへの参加と離脱
+ end
  post 'group_messages', to: "messages#group_create", as: "group_messages"
- resources :entries, only: [:create, :destroy]
  resources :messages, only: [:create,:destroy]
  resources :tasks, only: [:index,:show,:create]
 

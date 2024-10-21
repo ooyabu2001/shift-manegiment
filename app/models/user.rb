@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :entries, dependent: :destroy
+  has_many :groups, through: :entries 
   has_many :messages, dependent: :destroy
 
 def self.guest

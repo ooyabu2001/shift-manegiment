@@ -4,7 +4,7 @@
     <div class="col-md-5 lg-6 ml-6"></div>
      <h2>Users</h2>
       <%= link_to "グループを作成する", new_group_path %>
-      <%= render 'users/_user', users: @users %>
+      <%= render 'index', users: @users %>
   <table class="table">
     <thead>
       <tr>

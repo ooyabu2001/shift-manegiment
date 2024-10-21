@@ -1,26 +1,54 @@
 class GroupsController < ApplicationController
-  def index
-    @groups = Group.gm
-
-  end
-
-  def show
-    @group = Group.find(params[:id])
-    @entry = current_user.entries.find_or_initialize_by(group_id: @group.id)
-    @message = current_user.messages.build(group_id: @group.id)
-    @messages = @group.messages
-    @users = User.where(id: @group.entries.pluck(:user_id))
-
-  end
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :show]
 
   def new
     @group = Group.new(user_id: current_user.id)
   end
 
-  def create
-    group = Group.create #グループ作成
-    _current_entry = Entry.create(user_id: current_user.id, group_id: group.id )#ログインしているユーザーのレコード作成
-    _another_entry = Entry.create(user_id: params[:entry][:user_id],group_id: group.id)#メッセージ相手のレコード作成
-    redirect_to group_path(group)
+  def index
+    @groups = Group.all
+  end
+
+  def show
+    @group = Group.find(params[:id])
+    @users = @group.users  #@groupに入っているユーザーのみ格納
+     @entry = Entry.find_by(user_id: current_user.id, group_id: @group.id) || Entry.new(user_id: current_user.id, group_id: @group.id)
+    @message = current_user.messages.build(group_id: @group.id)
+    @messages = @group.messages
+    @owner_user = User.find(@group.owner_id) #グループオーナーを見つけて格納
+  end
+
+
+
+def create
+    @group = Group.new(group_params)#グループ作成
+    @group.owner_id = current_user.id
+  if @group.save
+    redirect_to group_path(@group),notice: "You have created group successfully."
+  else
+    render 'index'
+  end
+end
+
+def update
+    if @group.update(group_params)
+      redirect_to groups_path, notice: "You have updated group successfully."
+    else
+      render 'edit'
+    end
+end
+
+private
+
+  def group_params
+    params.permit(:group_name, :owner_id)
+  end
+
+  def ensure_correct_user #グループオーナーかどうかを判断する
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      redirect_to groups_path
+    end
   end
 end
