@@ -1,10 +1,38 @@
+ <% if user_signed_in? %>
+  <div class="search_form">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+      <%= f.text_field :task %>
+   <% if current_page?(controller: 'users') %>
+    <%= f.select :range, ( ['user','group']) %>
+   <% else %>
+      <%= f.select :range, ( ['task','date']) %>
+   <% end %>
+      <%= f.submit "検索",class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>
 <%= render "groups/groups_user",group: @group %>
 <div class="container">
   <div class="row">
-    <div class="col-md-5 lg-6 ml-6"></div>
+
+<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>ユーザ追加ページ</h2>
+      <%= form_with model: @user, local: true do |f| %>
+
+       <div class="form-user">
+         <%= f.label :name %>
+      　  <%= f.text_field :name, class: "form-control" %>
+       </div>
+       <div class="form-user">
+          <%= f.label :introduction %>
+          <%= f.text_area :introduction, class: "form-control" %>
+       </div>
+ <%= f.submit "Create User", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+   <div class="col-md-10">
      <h2>Users</h2>
-      <%= link_to "グループを作成する", new_group_path %>
-      <%= render 'index', users: @users %>
+   </div>
   <table class="table">
     <thead>
       <tr>
@@ -29,26 +57,3 @@
 
 
 
-
-<!--<div class="container">-->
-<!--  <div class="row">-->
-
-<!--    <div class="col-3">-->
-<!--      <span>サイドバー</span>-->
-<!--    </div>-->
-
-
-<!--    <div class="col-9">-->
-<!--      <span>こんてんつ</span>-->
-
-<!--      <div class="row">-->
-<!--        <div class="col-12"><span>内容①</span></div>-->
-<!--        <div class="col-12"><span>2</span></div>-->
-<!--        <div class="col-12"><span>3</span></div>-->
-<!--        <div class="col-12"><span>4</span></div>-->
-<!--        <div class="col-12"><span>5</span></div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->

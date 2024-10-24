@@ -2,12 +2,13 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy ]
 
   def index
+    @users= User.new
     @users = User.all
 
   end
 
    def mypage
-       @users = User.new
+      @users=User.new
    end
 
 
@@ -23,11 +24,17 @@ class UsersController < ApplicationController
     @message = @user.messages.build(receiver_id: @user.id)
     @messages = @group&.messages || []
 
-   
+
   end
 
   def create
-   
+    @user = User.new(user_params)
+   if @user.save
+    redirect_to users_path, notice: 'ユーザーを作成しました'
+   else
+    render :index
+   end
+
     if @user.save
      log_in @user
      redirect_to user_url(@user), "notice:ようこそ, shiftcalenderへ！"
@@ -35,7 +42,7 @@ class UsersController < ApplicationController
         render :top
     end
   end
-end
+
 
 
   def update
@@ -64,7 +71,7 @@ private
       params.require(:user).permit(:name, :email)
     end
 
-
+end
 
 
 

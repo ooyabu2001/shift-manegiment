@@ -14,7 +14,7 @@
                                               data: { confirm: "本当に退会しますか？" },
                                               class: "btn btn-danger" %>
       <% else %>
-        <%= form_with model: @entry do |f| %>
+        <%= form_with model: @entry, url: group_entries_path(@group.id) do |f| %>
           <%= f.hidden_field :group_id %>
           <%= f.submit "このグループに参加する", class: "btn btn-primary" %>
         <% end %>

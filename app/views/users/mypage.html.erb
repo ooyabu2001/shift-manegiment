@@ -1,19 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>ユーザ追加ページ</h2>
-      <%= form_with model: @users, local: true do |f| %>
-       <div class="form-user">
-         <%= f.label :name %>
-      　  <%= f.text_field :name, class: "form-control" %>
-       </div>
-       <div class="form-user">
-          <%= f.label :introduction %>
-          <%= f.text_area :introduction, class: "form-control" %>
-       </div>
- <%= link_to "Create user",users_path, class: "btn btn-primary" %>
-      <% end %>
-    </div>
+   
   </div>
 </div>
 

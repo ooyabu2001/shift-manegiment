@@ -11,7 +11,7 @@ class Group < ApplicationRecord
   validates :group_name, presence: true
   validates :owner_id, presence: true
 
-  after_create :add_first_entry
+  #after_create :add_first_entry
 
   private
 

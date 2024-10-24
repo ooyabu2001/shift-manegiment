@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   end
 
   def index
+    @group = Group.new(user_id: current_user.id)
     @groups = Group.all
   end
 
@@ -24,7 +25,9 @@ class GroupsController < ApplicationController
 def create
     @group = Group.new(group_params)#グループ作成
     @group.owner_id = current_user.id
-  if @group.save
+    
+    #byebug
+  if @group.save!
     redirect_to group_path(@group),notice: "You have created group successfully."
   else
     render 'index'
@@ -42,7 +45,7 @@ end
 private
 
   def group_params
-    params.permit(:group_name, :owner_id)
+    params.require(:group).permit(:group_name, :owner_id, :group)
   end
 
   def ensure_correct_user #グループオーナーかどうかを判断する
