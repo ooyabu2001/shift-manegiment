@@ -42,3 +42,11 @@
     </div>
   </div>
 </div>
+
+<% if @groups.any? %>
+  <% @groups.each do |group| %>
+    <%= link_to group.group_name,group_path(group) %><br>
+  <% end %>
+<% else %>
+  no-group
+<% end %>

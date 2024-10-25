@@ -2,9 +2,10 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy ]
 
   def index
-    @users= User.new
+    @user = User.new
     @users = User.all
-
+    @users = @users.where('name LIKE ?', "%#{params[:user_name]}%") if params[:user_name].present?
+    @users = @users.joins(:entry_groups).where('groups.group_name LIKE ?', "%#{params[:group_name]}%").distinct if params[:group_name].present?
   end
 
    def mypage
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
     @group = Group.find_by_id(group_exist.first.first) if group_exist.any?
     @message = @user.messages.build(receiver_id: @user.id)
     @messages = @group&.messages || []
+    @groups = @user.entry_groups
 
 
   end

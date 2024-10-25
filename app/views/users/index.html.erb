@@ -1,35 +1,19 @@
- <% if user_signed_in? %>
+  <% if user_signed_in? %>
   <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :task %>
-   <% if current_page?(controller: 'users') %>
-    <%= f.select :range, ( ['user','group']) %>
-   <% else %>
-      <%= f.select :range, ( ['task','date']) %>
-   <% end %>
-      <%= f.submit "検索",class: "btn btn-primary" %>
+    <%= form_with url: users_path, local: true, method: :get do |f| %>
+      <%= f.text_field :user_name, value: params[:user_name] %>
+      <%= f.text_field :group_name, value: params[:group_name] %>
+      <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>
 <% end %>
+
+
 <%= render "groups/groups_user",group: @group %>
 <div class="container">
   <div class="row">
 
-<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>ユーザ追加ページ</h2>
-      <%= form_with model: @user, local: true do |f| %>
 
-       <div class="form-user">
-         <%= f.label :name %>
-      　  <%= f.text_field :name, class: "form-control" %>
-       </div>
-       <div class="form-user">
-          <%= f.label :introduction %>
-          <%= f.text_area :introduction, class: "form-control" %>
-       </div>
- <%= f.submit "Create User", class: "btn btn-primary" %>
-      <% end %>
-    </div>
    <div class="col-md-10">
      <h2>Users</h2>
    </div>

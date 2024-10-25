@@ -1,12 +1,10 @@
  <% if user_signed_in? %>
   <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :task %>
-   <% if current_page?(controller: 'users') %>
-    <%= f.select :range, ( ['user','date']) %>
-   <% else %>
-      <%= f.select :range, ( ['task','date']) %>
-   <% end %>
+    <%= form_with url: tasks_path, local: true, method: :get do |f| %>
+      <%= f.text_field :task_title, value: params[:task_title] %>
+      <%= f.select :start_date, @months,
+                           { selected: (Date.parse(params[:start_date]).to_s + " 00:00:00 +0900" if params[:start_date].present?), include_blank: "現在の月"},
+                           {} %>
       <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>

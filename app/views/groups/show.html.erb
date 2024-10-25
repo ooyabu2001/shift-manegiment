@@ -10,7 +10,7 @@
         </tbody>
       </table>
       <% if @users.include?(current_user) %>
-        <%= link_to "このグループを退会する", entry_path(@entry), method: :delete,
+        <%= link_to "このグループを退会する", group_entry_path(@group,@entry), method: :delete,
                                               data: { confirm: "本当に退会しますか？" },
                                               class: "btn btn-danger" %>
       <% else %>

@@ -1,7 +1,14 @@
 class TasksController < ApplicationController
   def index
     @task = Task.new
-    @tasks = Task.all
+    @tasks = current_user.tasks
+    @tasks = @tasks.where('task_title LIKE ?', "%#{params[:task_title]}%") if params[:task_title].present?
+    params[:start_date] = Date.current.to_s unless params[:start_date].present?
+    current_date = Date.parse(params[:start_date])
+    @months = (-3..3).map do |i|
+      date = current_date.beginning_of_month.since(i.months)
+      ["#{date.year}/#{date.month}", date]
+    end
   end
 
   def show

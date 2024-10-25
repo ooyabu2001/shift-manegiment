@@ -1,8 +1,8 @@
 class EntriesController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
-    @group_user = current_user.entry.new(group_id: group.id)
-    @group = @entry.group
+    @entry = current_user.entries.find_or_initialize_by(group_id: @group.id)
+
     if @entry.save
       flash[:notice] = "参加しました"
       redirect_to group_path(@group)
@@ -17,8 +17,8 @@ class EntriesController < ApplicationController
 
   def destroy
     @group = Group.find(params[:group_id])
-    @entry= current_user.entry.find_by(group_id: group.id)
-    @entry.destroy
+    @entry= current_user.entries.find_by(id: params[:id])
+    @entry&.destroy
     redirect_to group_path(@group)
   end
 
