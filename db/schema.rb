@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_21_144008) do
+ActiveRecord::Schema.define(version: 2024_10_27_204243) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2024_10_21_144008) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
+  create_table "fovorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "message_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "group_name"
     t.datetime "created_at", precision: 6, null: false
@@ -69,7 +76,7 @@ ActiveRecord::Schema.define(version: 2024_10_21_144008) do
     t.integer "owner_id"
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "message", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "group_id", null: false
     t.text "body"

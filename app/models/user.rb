@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_many :entry_groups, through: :entries, source: :group
   has_many :groups, through: :entries 
   has_many :messages, dependent: :destroy
-
+  has_many :favorites, dependent: :destroy
+  
 def self.guest
   user = User.find_or_initialize_by(email: "guest@example.com")#ゲスト専用Emailを探すか新しく作成
   user.password = "guestguest"

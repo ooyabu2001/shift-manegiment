@@ -1,4 +1,4 @@
-class EntriesController < ApplicationController
+class Public::EntriesController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     @entry = current_user.entries.find_or_initialize_by(group_id: @group.id)

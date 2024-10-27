@@ -6,16 +6,16 @@ Rails.application.routes.draw do
   },as: 'admin_item'
 
   namespace :admin do
-    get 'dashboards', to: 'dashboards#index' do
+    get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:index, :destroy],as: 'admin_dashboards_users'
     resources :groups, only: [:index, :destroy],as:'admin_dashboards_groups'
-    end
   end
-
-devise_for :users
-devise_scope :user do
+  
+scope module: :public do 
+ devise_for :users
+ devise_scope :user do
   post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-end
+ end
 
  root to: "homes#top"
  get "homes/about", to: "homes#about", as: "about"
@@ -31,6 +31,6 @@ end
  resources :messages, only: [:create,:destroy]
  resources :tasks, only: [:index,:show,:create]
 
+ end
 end
-
 
