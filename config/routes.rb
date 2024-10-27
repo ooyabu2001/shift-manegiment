@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
 
+  devise_for :admins ,as: 'admins_item'
   devise_for :admin, skip: [:registrations, :password], controllers: {
   sessions: 'admin/sessions'
-  }
-  
+  },as: 'admin_item'
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index' do
+    resources :users, only: [:index, :destroy],as: 'admin_dashboards_users'
+    resources :groups, only: [:index, :destroy],as:'admin_dashboards_groups'
+    end
+  end
+
 devise_for :users
 devise_scope :user do
   post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
@@ -24,6 +32,5 @@ end
  resources :tasks, only: [:index,:show,:create]
 
 end
-
 
 
