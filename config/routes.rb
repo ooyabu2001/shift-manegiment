@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy],as: 'admin_dashboards_users'
     resources :groups, only: [:index, :destroy],as:'admin_dashboards_groups'
   end
-  
-scope module: :public do 
+
+scope module: :public do
  devise_for :users
  devise_scope :user do
   post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
