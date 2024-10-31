@@ -1,9 +1,9 @@
 <h1>グループ一覧</h1>
 <ul>
-  <%= @groups.each do |group| %>
+  <% @groups.each do |group| %>
    <li>
-     <%= group.name %>
-     <%= link_to '削除', admin_dashboard_admin_dashboards_groups_path(group), method: :delete, data: { confirm: '本当に削除しますか？' } %> 
+     <%= group.group_name %>
+     <%= link_to '削除', admin_admin_dashboards_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' } %> 
    </li>
   <% end %> 
 </ul>

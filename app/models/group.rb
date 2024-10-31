@@ -1,8 +1,8 @@
 class Group < ApplicationRecord
   attr_accessor :user_id
 
-  #scope :dm, -> { where(group_name: nil) }
-  #scope :gm, -> { where.not(group_name: nil) }
+  scope :dm, -> { where(group_name: nil) }
+  scope :gm, -> { where.not(group_name: nil) }
 
   has_many :entries, dependent: :destroy
    has_many :users, through: :entries

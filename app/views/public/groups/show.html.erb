@@ -45,6 +45,13 @@
           <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
         <% end %>
       <% end %>
+      <% if @message.favorited_by?(current_user) %>
+       <p>
+         <%= link_to message_favorite_path(@message),method: :post do %>
+            ♡<%= @message %>
+         <% end %>
+       </p>
+      <% end %>
     </div>
   </div>
 </div>

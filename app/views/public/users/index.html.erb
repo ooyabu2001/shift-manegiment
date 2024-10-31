@@ -9,7 +9,7 @@
 <% end %>
 
 
-<%= render "groups/groups_user",group: @group %>
+<%= render "/public/groups/groups_user",group: @group %>
 <div class="container">
   <div class="row">
 
@@ -31,6 +31,7 @@
           <td><%= user.name %></td>
           <td><%= user.introduction %></td>
           <td><%= link_to "詳細", user_path(user) %></td>
+          <td><%= link_to "削除", destroy_user_session_path(@user.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
         </tr>
       <% end %>
     </tbody>

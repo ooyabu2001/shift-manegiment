@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :admins ,as: 'admins_item'
-  devise_for :admin, skip: [:registrations, :password], controllers: {
+  #devise_for :admins
+  devise_for :admins, skip: [:registrations, :password], controllers: {
   sessions: 'admin/sessions'
-  },as: 'admin_item'
+  }
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
@@ -28,7 +28,9 @@ scope module: :public do
   resources :entries, only: [:create, :destroy]  # グループへの参加と離脱
  end
  post 'group_messages', to: "messages#group_create", as: "group_messages"
- resources :messages, only: [:create,:destroy]
+ resources :messages, only: [:create,:destroy] do
+  resource :favorite, only: [:create, :destroy]
+ end
  resources :tasks, only: [:index,:show,:create]
 
  end

@@ -7,7 +7,7 @@
     <% end %>
   </div>
 <% end %>
-<%= render "groups/groups_user",group: @group %>
+<%= render "/public/groups/groups_user",group: @group %>
 <div class="container">
   <div class="row">
 
@@ -38,6 +38,7 @@
            <tr>
              <td><%= group.group_name %></td>
              <td><%= link_to "詳細", group_path(group) %></td>
+             
           </tr>
         <% end %>
       <% else %>

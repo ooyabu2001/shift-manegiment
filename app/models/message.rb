@@ -9,9 +9,10 @@ class Message < ApplicationRecord
 
   before_validation :set_entries
 
-  private
+
 
   def set_entries
+    #byebug
     if self.group.nil?
       groups = Group.dm.joins(:entries)
                        .where('entries.user_id': [self.user_id, self.receiver_id])

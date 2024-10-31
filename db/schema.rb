@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2024_10_27_204243) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
-  create_table "fovorites", force: :cascade do |t|
+  create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "message_id"
     t.datetime "created_at", precision: 6, null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2024_10_27_204243) do
     t.integer "owner_id"
   end
 
-  create_table "message", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "group_id", null: false
     t.text "body"

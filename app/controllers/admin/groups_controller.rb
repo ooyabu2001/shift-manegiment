@@ -1,5 +1,12 @@
 class Admin::GroupsController < ApplicationController
+   layout 'admin'
    before_action :authenticate_admin!
+   
+    def index
+      @groups = Group.all
+      render layout: 'admin', partial: 'admin/dashboards/group'
+    end
+   
     def destroy
         @group = Group.find(params[:id])
         @group.destroy

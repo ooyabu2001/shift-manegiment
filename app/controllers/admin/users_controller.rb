@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
+  layout 'admin'
   before_action :authenticate_admin!
 
 
     def index
-      @users=User.all
-      render partial: 'admin/dashboards/user', collection: @users
+      @users = User.all
+      render layout: 'admin', partial: 'admin/dashboards/user'
     end
 
     def destroy
