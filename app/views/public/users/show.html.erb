@@ -37,7 +37,21 @@
           <%= f.hidden_field :receiver_id %>
           <%= f.text_area :body, rows: 3, placeholder: "直接メッセージを送信できます", class: "form-control" %>
           <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
+
         <% end %>
+        <% if @message.favorited_by?(current_user) %>
+         <p>
+          <%= link_to user_path(@user), method: :delete do %>
+          ♥<%= @user.favorites.count %> いいね
+       <% end %>
+    </p>
+        <% else %>
+    <p>
+      <%= link_to user_path(@user), method: :post do %>
+        ♡<%= @user.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
       <% end %>
     </div>
   </div>
