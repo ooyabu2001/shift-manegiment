@@ -30,6 +30,7 @@
         <% end %>
       </div>
 
+<div class="col-8">
       <hr>
       <% if @user != current_user %>
         <%= form_with model: @message, class: "my-4" do |f| %>
@@ -39,20 +40,23 @@
           <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
 
         <% end %>
+      </div>
+      <div class="col-4">
         <% if @message.favorited_by?(current_user) %>
          <p>
-          <%= link_to user_path(@user), method: :delete do %>
+          <%= link_to message_favorite_path(@user), method: :delete do %>
           ♥<%= @user.favorites.count %> いいね
        <% end %>
     </p>
         <% else %>
     <p>
-      <%= link_to user_path(@user), method: :post do %>
+      <%= link_to message_favorite_path(@user), method: :post do %>
         ♡<%= @user.favorites.count %> いいね
       <% end %>
     </p>
   <% end %>
       <% end %>
+      </div>
     </div>
   </div>
 </div>
