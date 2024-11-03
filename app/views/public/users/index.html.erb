@@ -1,8 +1,8 @@
   <% if user_signed_in? %>
   <div class="search_form">
     <%= form_with url: users_path, local: true, method: :get do |f| %>
-      <%= f.text_field :user_name, value: params[:user_name] %>
-      <%= f.text_field :group_name, value: params[:group_name] %>
+      <%= f.text_field :user_name, value: params[:user_name],placeholder: "ユーザー名"%>
+      <%= f.text_field :group_name, value: params[:group_name],placeholder: "グループ名" %>
       <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>
@@ -20,18 +20,19 @@
   <table class="table">
     <thead>
       <tr>
-        <th>| 氏名</th>
-        <th> | 自己紹介</th>
-        <th></th>
+        <th class="table-light"> 氏名</th>
+        <th class="table-light">  自己紹介</th>
+        <th class="table-light"></th>
+        <th class="table-light"></th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.name %></td>
-          <td><%= user.introduction %></td>
-          <td><%= link_to "詳細", user_path(user) %></td>
-          <td><%= link_to "削除", destroy_user_session_path(@user.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+          <td class="table-light"><%= user.name %></td>
+          <td class="table-light"><%= user.introduction %></td>
+          <td class="table-light"><%= link_to "詳細", user_path(user) %></td>
+          <td class="table-light"><%= link_to "削除", destroy_user_session_path(@user.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
         </tr>
       <% end %>
     </tbody>

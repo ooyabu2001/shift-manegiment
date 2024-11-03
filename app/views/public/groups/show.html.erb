@@ -4,8 +4,8 @@
       <table class="table">
         <tbody>
           <tr>
-            <th>グループ名</th>
-            <td><%= @group.group_name %></td>
+            <th class="table-light">グループ名</th>
+            <td class="table-light"><%= @group.group_name %></td>
           </tr>
         </tbody>
       </table>
@@ -26,8 +26,21 @@
           <% @messages.each do |message| %>
             <div class="col-8 <%= "offset-4" if message.user == current_user %>">
               <div class="card my-2">
-                <div class="card-body">
+                <div class="card-body" style="background-color: #CCFF99;">
                   <%= message.body %>
+                  <% if message.favorited_by?(current_user) %>
+         <p>
+          <%= link_to message_favorite_path(message), method: :delete do %>
+          ♥<%= message.favorites.count %> いいね
+          <% end %>
+         </p>
+      <% else %>
+          <p>
+            <%= link_to message_favorite_path(message), method: :post do %>
+            ♡<%= message.favorites.count %> いいね
+            <% end %>
+          </p>
+      <% end %>
                 </div>
               </div>
             </div>
@@ -45,13 +58,7 @@
           <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
         <% end %>
       <% end %>
-      <% if @message.favorited_by?(current_user) %>
-       <p>
-         <%= link_to message_favorite_path(@message),method: :post do %>
-            ♡<%= @message %>
-         <% end %>
-       </p>
-      <% end %>
+
     </div>
   </div>
 </div>
