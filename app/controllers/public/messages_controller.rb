@@ -2,7 +2,7 @@ class Public::MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.build(message_params)
-    if @message.save
+    if @message.save!
       flash[:norice] = "メッセージを送信しました。"
       redirect_to user_path(@message.receiver_id)
     else
@@ -10,7 +10,8 @@ class Public::MessagesController < ApplicationController
       @user = User.find(@message.receiver_id)
       @group = @message.group
       @messages = @group&.messages || []
-      render 'users/show'
+      @groups = @user.entry_groups
+      render 'public/users/show'
     end
   end
 

@@ -1,2 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 @import "./simple_calendar.scss";
+
+body {
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+}

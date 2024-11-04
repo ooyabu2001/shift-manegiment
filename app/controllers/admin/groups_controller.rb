@@ -4,7 +4,6 @@ class Admin::GroupsController < ApplicationController
    
     def index
       @groups = Group.all
-      render layout: 'admin', partial: 'admin/dashboards/group'
     end
    
     def destroy

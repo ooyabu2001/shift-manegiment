@@ -13,6 +13,15 @@
 <div class="container">
   <div class="row">
 
+  <div class="col-md-6"></div>
+   <div class="col-md-4">
+<%= form_with model: @user do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.submit %>
+<% end %>
+  </div>
 
    <div class="col-md-10">
      <h2>Users</h2>
@@ -20,10 +29,10 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="table-light"> 氏名</th>
-        <th class="table-light">  自己紹介</th>
-        <th class="table-light"></th>
-        <th class="table-light"></th>
+        <th class="text-light table-dark"> 氏名</th>
+        <th class="text-light table-dark">  自己紹介</th>
+        <th class="table-dark"></th>
+        <th class="table-dark"></th>
       </tr>
     </thead>
     <tbody>

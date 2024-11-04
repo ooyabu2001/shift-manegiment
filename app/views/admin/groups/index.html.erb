@@ -1,0 +1,18 @@
+
+<h1>グループ一覧</h1>
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-lg-6 offset-lg-3">
+    <ul class="list-group list-group-flush">
+      <% @groups.each do |group| %>
+        <li class="list-group-item ">
+         <%= group.group_name %>
+         <%= link_to '削除', admin_admin_dashboards_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+       </li>
+      <% end %>
+    </ul>
+    <div class="d-flex justify-content-center">
+      <%= link_to "back", admin_root_path, class: "btn btn-secondary mt-4" %>
+    </div>
+  </div>
+</div>
+

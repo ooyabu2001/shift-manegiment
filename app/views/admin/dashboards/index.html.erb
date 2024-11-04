@@ -1,33 +1,13 @@
+<h1>管理画面</h1>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="">
+      <%= link_to "users", admin_admin_dashboards_users_path, class:"btn btn-primary btn-sm btn-block mb-3" %>
+    </div>
 
-<html>
-  <head>
-    <title>ShiftManagement</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-   <script src="https://kit.fontawesome.com/e1c1163e5c.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  </head>
-
-<div class="container">
- <div class="row justify-content-center align-items-center" style="height: 100vh;">
-    <div class="mx-auto col-11 col-sm-8 col-lg-3 align-items-end">
-
-  <h1>管理画面</h1>
-
-  <div class="d-grid gap-2">
-  <%= link_to "users", admin_admin_dashboards_users_path, class:"btn btn-primary btn-sm btn-block mb-3" %>
-  </div>
-
-  <div class="d-grid gap-2">
-  <%= link_to "groups", admin_admin_dashboards_groups_path, class:"btn btn-success btn-sm btn-block" %>
-  </div>
-
+  <div class="">
+     <%= link_to "groups", admin_admin_dashboards_groups_path, class:"btn btn-success btn-sm btn-block" %>
   </div>
  </div>
 </div>
-</html>
+

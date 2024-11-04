@@ -13,6 +13,18 @@ class  Public::UsersController < ApplicationController
    end
 
 
+  def verify_email
+    user = User.find_by_verification_token(params[:token])
+
+    if user
+      user.update(verified: true)
+      redirect_to root_path, notice: "Your email has been verified. Welcome!"
+    else
+      redirect_to root_path, alert: "Invalid verification token."
+    end
+  end
+
+
   def show
     @users=User.all
     @user = User.find(params[:id])
@@ -30,18 +42,15 @@ class  Public::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-   if @user.save
-    redirect_to users_path, notice: 'ユーザーを作成しました'
-   else
-    render :index
-   end
+     @user = User.new(user_params)
 
     if @user.save
-     log_in @user
-     redirect_to user_url(@user), "notice:ようこそ, shiftcalenderへ！"
+       UserMailer.registration_confirmation(@user).deliver_now  # メール送信
+        log_in @user  # ログイン処理
+        redirect_to user_url(@user), notice: "Welcome to Shift Calendar! Please check your email to verify your account."
     else
-        render :top
+      flash.now[:alert] = 'Failed to create user.'
+      render :index
     end
   end
 

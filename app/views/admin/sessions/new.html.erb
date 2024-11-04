@@ -4,7 +4,7 @@
 <%= form_with model: @admin, url: session_path(resource_name), local: true do |f| %>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+
 
   <div class="field">
     <%= f.label :password %><br />

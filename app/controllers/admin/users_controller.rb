@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
 
     def index
       @users = User.all
-      render layout: 'admin', partial: 'admin/dashboards/user'
+
     end
 
     def destroy

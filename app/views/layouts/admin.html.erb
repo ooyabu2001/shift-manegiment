@@ -7,36 +7,31 @@
 
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
 </head>
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
-
-
-     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ml-auto">
-  <% if admin_signed_in? %>
-     <li>
-      <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete ,  class: 'nav-link text-light'%>
-    </li>
-
-     <li>
-      <%= link_to "users", admin_admin_dashboards_users_path,  class: 'nav-link text-light' %>
-     </li>
-
-     <li>
-       <%= link_to "groups", admin_admin_dashboards_groups_path,  class: 'nav-link text-light' %>
-     </li>
-
-    
-  <% end %>
-      </ul>
-     </div>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if admin_signed_in? %>
+            <li>
+              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete ,  class: 'nav-link text-light'%>
+            </li>
+            <li>
+              <%= link_to "users", admin_admin_dashboards_users_path,  class: 'nav-link text-light' %>
+            </li>
+            
+            <li>
+              <%= link_to "groups", admin_admin_dashboards_groups_path,  class: 'nav-link text-light' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    root to: "dashboards#index"
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:index, :destroy],as: 'admin_dashboards_users'
     resources :groups, only: [:index, :destroy],as:'admin_dashboards_groups'
@@ -32,7 +33,9 @@ scope module: :public do
   resource :favorite, only: [:create, :destroy]
  end
  resources :tasks, only: [:index,:show,:create]
+ get "day_tasks", to: "tasks#day_tasks", as: "day_tasks"
 
  end
+  resources :notifications, only: [:update]
 end
 

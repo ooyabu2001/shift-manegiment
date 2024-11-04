@@ -2,7 +2,7 @@
   <% if user_signed_in? %>
   <div class="search_form">
     <%= form_with url: groups_path, local: true, method: :get do |f| %>
-      <%= f.text_field :group_name, value: params[:group_name] %>
+      <%= f.text_field :group_name, value: params[:group_name],placeholder: "グループ名" %>
        <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>
@@ -15,11 +15,10 @@
       <h2>グループ作成</h2>
       <%= form_with model: @group, local: true do |f| %>
         <div class="form-group">
-          <%= f.label :group_name %>
-          <%= f.text_field :group_name, class: "form-control" %>
+          <%= f.text_field :group_name, class: "form-control",placeholder: "グループ名" %>
         </div>
 
-        <%= f.submit "Create Group", class: "btn btn-primary" %>
+        <%= f.submit "Create Group", class: "btn btn-primary mb-3" %>
       <% end %>
     </div>
   </div>
@@ -27,8 +26,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>グループ名</th>
-        <th>詳細</th>
+        <th class="text-light table-dark">グループ名</th>
+        <th class="text-light table-dark">詳細</th>
       </tr>
     </thead>
 
@@ -36,9 +35,9 @@
      <% if @groups.present? && @groups.any? %>
         <% @groups.each do |group| %>
            <tr>
-             <td><%= group.group_name %></td>
-             <td><%= link_to "詳細", group_path(group) %></td>
-             
+             <td class="table-light"><%= group.group_name %></td>
+             <td class="table-light"><%= link_to "詳細", group_path(group) %></td>
+
           </tr>
         <% end %>
       <% else %>

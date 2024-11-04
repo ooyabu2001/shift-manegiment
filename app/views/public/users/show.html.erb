@@ -48,7 +48,7 @@
       <% if @user != current_user %>
         <%= form_with model: @message, class: "my-4" do |f| %>
           <%= f.hidden_field :user_id %>
-          <%= f.hidden_field :receiver_id %>
+          <%= f.hidden_field :receiver_id,value: @user.id %>
           <%= f.text_area :body, rows: 3, placeholder: "直接メッセージを送信できます", class: "form-control" %>
           <%= f.submit '送信', class: 'btn-sm btn-success my-2' %>
 

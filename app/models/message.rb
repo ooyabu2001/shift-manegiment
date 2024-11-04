@@ -4,15 +4,23 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :group
   has_many :favorites, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :body, presence: true
 
   before_validation :set_entries
 
 
+  after_create do
+
+      ::Notification.create!(user_id: receiver_id,notifiable_type: "message", notifiable_id: user.id)
+
+  end
+
+
 
   def set_entries
-    #byebug
+
     if self.group.nil?
       groups = Group.dm.joins(:entries)
                        .where('entries.user_id': [self.user_id, self.receiver_id])
@@ -38,3 +46,4 @@ class Message < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 end
+
