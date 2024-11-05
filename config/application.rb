@@ -24,6 +24,6 @@ module ShiftManagement
 
      config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] #複数のローカルファイル読み込み
 
-
+    config.action_mailer.default_url_options = { host: 'example.com'}
   end
 end

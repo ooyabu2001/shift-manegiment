@@ -37,22 +37,16 @@ class  Public::UsersController < ApplicationController
     @message = @user.messages.build(receiver_id: @user.id)
     @messages = @group&.messages || []
     @groups = @user.entry_groups
-
-
   end
 
-  def create
-     @user = User.new(user_params)
-
-    if @user.save
-       UserMailer.registration_confirmation(@user).deliver_now  # メール送信
-        log_in @user  # ログイン処理
-        redirect_to user_url(@user), notice: "Welcome to Shift Calendar! Please check your email to verify your account."
-    else
-      flash.now[:alert] = 'Failed to create user.'
-      render :index
-    end
-  end
+   def create
+    @user = User.new(user_params)
+      if @user.save
+       redirect_to users_path, notice: 'ユーザーを作成しました'
+      else
+    render :index
+      end
+   end
 
   def edit
       @user = User.find(params[:id])

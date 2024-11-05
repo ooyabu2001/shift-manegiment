@@ -13,15 +13,7 @@
 <div class="container">
   <div class="row">
 
-  <div class="col-md-6"></div>
-   <div class="col-md-4">
-<%= form_with model: @user do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
 
-  <%= f.submit %>
-<% end %>
-  </div>
 
    <div class="col-md-10">
      <h2>Users</h2>
@@ -41,7 +33,7 @@
           <td class="table-light"><%= user.name %></td>
           <td class="table-light"><%= user.introduction %></td>
           <td class="table-light"><%= link_to "詳細", user_path(user) %></td>
-          <td class="table-light"><%= link_to "削除", destroy_user_session_path(@user.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+          <td class="table-light"><%= link_to "削除", user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %></td>
         </tr>
       <% end %>
     </tbody>
