@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
   has_many :tasks, dependent: :destroy
   has_many :entries, dependent: :destroy
-  has_many :entry_groups, through: :entries, source: :group
   has_many :groups, through: :entries
   has_many :messages, dependent: :destroy
   has_many :favorites, dependent: :destroy

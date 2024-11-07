@@ -6,28 +6,28 @@ class Public::GroupsController < ApplicationController
     @group = Group.new(user_id: current_user.id)
   end
 
-  def index
+def index
     @group = Group.new(user_id: current_user.id)
     @groups = Group.all
-  end
+
+end
 
   def show
-    @group = Group.find(params[:id])
+
     @users = @group.users  #@groupに入っているユーザーのみ格納
-     @entry = Entry.find_by(user_id: current_user.id, group_id: @group.id) || Entry.new(user_id: current_user.id, group_id: @group.id)
+    @entry = Entry.find_by(user_id: current_user.id, group_id: @group.id) || Entry.new(user_id: current_user.id, group_id: @group.id)
     @message = current_user.messages.build(group_id: @group.id)
     @messages = @group.messages
     @owner_user = User.find(@group.owner_id) #グループオーナーを見つけて格納
+
   end
-
-
 
 def create
     @group = Group.new(group_params)#グループ作成
     @group.owner_id = current_user.id
-    
+
     #byebug
-  if @group.save!
+  if @group.save
     redirect_to group_path(@group),notice: "You have created group successfully."
   else
     render 'index'

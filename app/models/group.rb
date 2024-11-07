@@ -7,12 +7,14 @@ class Group < ApplicationRecord
   has_many :entries, dependent: :destroy
    has_many :users, through: :entries
   has_many :messages, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+
 
   validates :group_name, presence: true
   validates :owner_id, presence: true
 
   #after_create :add_first_entry
+
+  validates :group_name, uniqueness: true
 
   private
 
