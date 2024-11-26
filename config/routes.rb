@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get '/config.json', to: 'configurations#show'
+  get '/.env', to: 'application#error_404'
+  post '/', to: 'application#handle_post_request'
+
   #devise_for :admins
   devise_for :admins, skip: [:registrations, :password], controllers: {
   sessions: 'admin/sessions'

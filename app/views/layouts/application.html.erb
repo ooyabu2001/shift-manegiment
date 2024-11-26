@@ -42,7 +42,7 @@
 
        <li class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Notification
+
               <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
